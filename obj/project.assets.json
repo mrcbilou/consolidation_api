@@ -9785,19 +9785,19 @@
     ]
   },
   "packageFolders": {
-    "/Users/alimouranabalde/.nuget/packages/": {}
+    "/home/mrcbilou/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/alimouranabalde/Downloads/Deliverables/Rocket_Elevator_Rest_API/RestApi.csproj",
+      "projectUniqueName": "/home/mrcbilou/gconapi/RestApi.csproj",
       "projectName": "RestApi",
-      "projectPath": "/Users/alimouranabalde/Downloads/Deliverables/Rocket_Elevator_Rest_API/RestApi.csproj",
-      "packagesPath": "/Users/alimouranabalde/.nuget/packages/",
-      "outputPath": "/Users/alimouranabalde/Downloads/Deliverables/Rocket_Elevator_Rest_API/obj/",
+      "projectPath": "/home/mrcbilou/gconapi/RestApi.csproj",
+      "packagesPath": "/home/mrcbilou/.nuget/packages/",
+      "outputPath": "/home/mrcbilou/gconapi/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/alimouranabalde/.nuget/NuGet/NuGet.Config"
+        "/home/mrcbilou/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -9888,7 +9888,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.403/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.403/RuntimeIdentifierGraph.json"
       }
     }
   },
