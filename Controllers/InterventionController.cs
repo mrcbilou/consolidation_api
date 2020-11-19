@@ -25,6 +25,10 @@ namespace RestApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Intervention>>> Getinterventions()
         {
+                
+            // if(intervention.intervention_status == "Pending" && intervention.start_date_and_time == null){
+                
+            // }
             return await _context.interventions.ToListAsync();
         }
 
@@ -38,9 +42,12 @@ namespace RestApi.Controllers
             {
                 return NotFound();
             }
+
+         
+
             // Create a message to show the new status
             var interstatus = new JObject ();
-            interstatus["string"] = intervention.intervention_status;
+            interstatus["string"] = intervention.Id;
             return Content (interstatus.ToString (), "application/json");
         }
 
@@ -71,7 +78,7 @@ namespace RestApi.Controllers
             _context.SaveChanges ();
             // Create a message to show the new status 
             var intstatus = new JObject ();
-            intstatus["message"] = "The status of the Intervention with the id number #" + b.id + " have been changed to " + b.intervention_status +" at Date:" + b.start_date_and_time + b.end_date_and_time ;
+            intstatus["message"] = "The status of the Intervention with the id number #" + b.Id + " have been changed to " + b.intervention_status +" at Date:" + b.start_date_and_time + b.end_date_and_time ;
             return Content (intstatus.ToString (), "application/json");
 
         }
