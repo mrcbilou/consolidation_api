@@ -21,14 +21,14 @@ namespace RestApi.Controllers
             _context = context;
         }
 
-        // GET: api/Battery
+        // GET: api/Intervention
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Intervention>>> Getinterventions()
         {
             return await _context.interventions.ToListAsync();
         }
 
-        // GET: api/Battery/5
+        // GET: api/Intervention/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Intervention>> GetIntervention(long id)
         {
@@ -39,9 +39,9 @@ namespace RestApi.Controllers
                 return NotFound();
             }
             // Create a message to show the new status
-            var status = new JObject ();
-            status["status"] = intervention.status;
-            return Content (status.ToString (), "application/json");
+            var statuse = new JObject ();
+            statuse["status"] = intervention.status;
+            return Content (statuse.ToString (), "application/json");
         }
 
         // PUT: api/Battery/5
