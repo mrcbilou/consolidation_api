@@ -30,7 +30,7 @@ namespace RestApi.Controllers
 
         // GET: api/Intervention/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Intervention>> GetIntervention(long id)
+        public async Task<ActionResult<Intervention>> GetIntervention(int id)
         {
             var intervention = await _context.interventions.FindAsync(id);
 
@@ -39,30 +39,30 @@ namespace RestApi.Controllers
                 return NotFound();
             }
             // Create a message to show the new status
-            var statuse = new JObject ();
-            statuse["status"] = intervention.status;
-            return Content (statuse.ToString (), "application/json");
+            var interstatus = new JObject ();
+            interstatus["string"] = intervention.intervention_status;
+            return Content (interstatus.ToString (), "application/json");
         }
 
         // PUT: api/Battery/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutIntervention(long id, Intervention intervention)
+        public async Task<IActionResult> PutIntervention(int id, Intervention intervention)
         {
             var b = await _context.interventions.FindAsync (id);
             if (b == null) {
                 return NotFound ();
             }
             
-            b.status = intervention.status;
+            b.intervention_status = intervention.intervention_status;
 
             _context.interventions.Update (b);
             _context.SaveChanges ();
-            // Create a message to show the new status
-            var status = new JObject ();
-            status["message"] = "The status of the Intervention with the id number #" + b.Id + " have been changed to " + intervention.status;
-            return Content (status.ToString (), "application/json");
+            // Create a message to show the new status 
+            var intstatus = new JObject ();
+            intstatus["message"] = "The status of the Intervention with the id number #" + b.id + " have been changed to " + b.intervention_status;
+            return Content (intstatus.ToString (), "application/json");
 
         }
             
