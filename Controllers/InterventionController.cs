@@ -56,12 +56,22 @@ namespace RestApi.Controllers
             }
             
             b.intervention_status = intervention.intervention_status;
+            b.start_date_and_time = intervention.start_date_and_time;
+            b.end_date_and_time = intervention.end_date_and_time;
+
+            if (b.intervention_status == "InProgress"){
+                b.start_date_and_time = DateTime.Today;
+            }
+
+            if (b.intervention_status == "Completed"){
+                b.end_date_and_time = DateTime.Today;
+            }
 
             _context.interventions.Update (b);
             _context.SaveChanges ();
             // Create a message to show the new status 
             var intstatus = new JObject ();
-            intstatus["message"] = "The status of the Intervention with the id number #" + b.id + " have been changed to " + b.intervention_status;
+            intstatus["message"] = "The status of the Intervention with the id number #" + b.id + " have been changed to " + b.intervention_status +" at Date:" + b.start_date_and_time + b.end_date_and_time ;
             return Content (intstatus.ToString (), "application/json");
 
         }

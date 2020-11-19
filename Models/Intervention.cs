@@ -20,5 +20,6 @@ namespace RestApi.Models
         public string report {get; set;}
         public DateTime created_at {get; set;}
         public DateTime updated_at {get; set;}
+        public static DateTime Today { get; }
     }
 }
