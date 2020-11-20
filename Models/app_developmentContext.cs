@@ -20,5 +20,6 @@ namespace RestApi.Models
         public virtual DbSet<BuildingDetail> building_details { get; set; }
         public virtual DbSet<Customer> customers { get; set; }
         public virtual DbSet<Employe> employees { get; set; }
+        public virtual DbSet<Intervention> interventions { get; set; }
     }
 }
