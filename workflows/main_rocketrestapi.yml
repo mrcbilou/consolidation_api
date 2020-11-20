@@ -29,7 +29,7 @@ jobs:
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v2
       with:
-        app-name: 'rocketrestapi'
+        app-name: 'louisconsolidation'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_d034eabd0d3140a8876b8689e3247d9f }}
         package: ${{env.DOTNET_ROOT}}/myapp 
