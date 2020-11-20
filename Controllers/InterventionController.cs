@@ -64,11 +64,11 @@ namespace RestApi.Controllers
             return Content (interstatus.ToString (), "application/json");
         }
 
-        // PUT: api/Battery/5
+        // PUT: api/Intervention/InProgress/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutIntervention(int id, Intervention intervention)
+        [HttpPut("InProgress/{id}")]
+        public async Task<IActionResult> PutInterventionInProgress(int id, Intervention intervention)
         {
             var b = await _context.interventions.FindAsync (id);
             if (b == null) {
@@ -77,24 +77,48 @@ namespace RestApi.Controllers
             
             b.intervention_status = intervention.intervention_status;
             b.start_date_and_time = intervention.start_date_and_time;
-            b.end_date_and_time = intervention.end_date_and_time;
+            
 
             if (b.intervention_status == "InProgress"){
-                b.start_date_and_time = DateTime.Today;
+                b.start_date_and_time = DateTime.Now;
             }
 
+           
+            _context.interventions.Update (b);
+            _context.SaveChanges ();
+            // Create a message to show the new status 
+            var intstatus = new JObject ();
+            intstatus["message"] = "The status of the Intervention with the id number #" + b.Id + " have been changed to " + b.intervention_status +" at Date:" + b.start_date_and_time  ;
+            return Content (intstatus.ToString (), "application/json");
+
+        }
+            
+        // PUT: api/Intervention/Completed/5
+         [HttpPut("Completed/{id}")]
+        public async Task<IActionResult> PutInterventionCompleted(int id, Intervention intervention)
+        {
+            var b = await _context.interventions.FindAsync (id);
+            if (b == null) {
+                return NotFound ();
+            }
+            
+            b.intervention_status = intervention.intervention_status;
+            
+            b.end_date_and_time = intervention.end_date_and_time;
+
+            
+
             if (b.intervention_status == "Completed"){
-                b.end_date_and_time = DateTime.Today;
+                b.end_date_and_time = DateTime.Now;
             }
 
             _context.interventions.Update (b);
             _context.SaveChanges ();
             // Create a message to show the new status 
             var intstatus = new JObject ();
-            intstatus["message"] = "The status of the Intervention with the id number #" + b.Id + " have been changed to " + b.intervention_status +" at Date:" + b.start_date_and_time + b.end_date_and_time ;
+            intstatus["message"] = "The status of the Intervention with the id number #" + b.Id + " have been changed to " + b.intervention_status +" at Date:"  + b.end_date_and_time ;
             return Content (intstatus.ToString (), "application/json");
 
         }
-            
     }
 }
