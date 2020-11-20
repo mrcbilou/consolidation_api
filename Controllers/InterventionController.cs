@@ -23,13 +23,26 @@ namespace RestApi.Controllers
 
         // GET: api/Intervention
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Intervention>>> Getinterventions()
+        public async Task<ActionResult<List<Intervention>>> GetAll()
         {
-                
-            // if(intervention.intervention_status == "Pending" && intervention.start_date_and_time == null){
-                
-            // }
-            return await _context.interventions.ToListAsync();
+            
+            var list = _context.interventions.ToList(); // list of all interventions
+            
+            if (list == null)
+            {
+                return NotFound();
+            }
+
+            List<Intervention> pending_intervention_list = new List<Intervention>(); // Interventions will be added in this list if they respect the requirements (If they have a pending status and no start date.)
+            
+            foreach (var intervention in list)
+            {
+                if(intervention.intervention_status == "Pending" && intervention.start_date_and_time == null) {
+                    pending_intervention_list.Add (intervention);
+                }
+            }
+            return pending_intervention_list;
+
         }
 
         // GET: api/Intervention/5
