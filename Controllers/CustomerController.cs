@@ -28,35 +28,38 @@ namespace RestApi.Controllers
             return await _context.customers.ToListAsync();
         }
 
-        // GET: api/Customer/5
-        [HttpGet("{company_contact_email}")]
-        public async Task<ActionResult<Customer>> GetCustomer(string company_contact_email)
-        {
-            var customer = await _context.customers.FindAsync(company_contact_email);
-
-            if (customer == null)
-            {
-                return NotFound();
-            }
-
-            return customer;
-        }
-
-        // GET: api/Customer/5
-        // [HttpGet("{id}")]
-        //   public async Task<ActionResult<Customer>> GetCustomer(long id)
+        //GET: api/Customer/test@test.com
+        // [HttpGet("{company_contact_email}")]
+        // public async Task<ActionResult<Customer>> GetCustomer(string company_contact_email)
         // {
-        //     var customer = await _context.customers.FindAsync(id);
+        //     var customer = await _context.customers.FindAsync(company_contact_email);
 
         //     if (customer == null)
         //     {
         //         return NotFound();
         //     }
-        //     // Create a message to show the new status
+
         //     var status = new JObject ();
-        //     status["status"] = customer.Id;
+        //     status["email"] = customer.company_contact_email;
         //     return Content (status.ToString (), "application/json");
         // }
+
+        // GET: api/Customer/5
+        [HttpGet("{id}")]
+          public async Task<ActionResult<Customer>> GetCustomer(long id)
+        {
+            var customer = await _context.customers.FindAsync(id);
+
+            if (customer == null)
+            {
+                return NotFound();
+            }
+            //Create a message to show the new status
+            var status = new JObject ();
+            status["email"] = customer.company_contact_email;
+            return Content (status.ToString (), "application/json");
+
+        }
 
         // PUT: api/User/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
