@@ -39,9 +39,7 @@ namespace RestApi.Controllers
                 return NotFound();
             }
 
-            var customeremail = new JObject ();
-            customeremail["Email"] = customer.company_contact_email;
-            return Content (customeremail.ToString (), "application/json");
+            return customer;
         }
 
         // GET: api/Customer/5
