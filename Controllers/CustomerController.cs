@@ -29,24 +29,8 @@ namespace RestApi.Controllers
         }
 
         // GET: api/Customer/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Customer>> GetCustomer(long id)
-        {
-            var customer = await _context.customers.FindAsync(id);
-
-            if (customer == null)
-            {
-                return NotFound();
-            }
-
-            var customerid = new JObject ();
-            customerid["Customer ID"] = customer.Id;
-            return Content (customerid.ToString (), "application/json");
-        }
-
-        // GET: api/Customer/test@test.com
         [HttpGet("{company_contact_email}")]
-        public async Task<ActionResult<Customer>> GetEmail(string company_contact_email)
+        public async Task<ActionResult<Customer>> GetCustomer(string company_contact_email)
         {
             var customer = await _context.customers.FindAsync(company_contact_email);
 
@@ -55,10 +39,26 @@ namespace RestApi.Controllers
                 return NotFound();
             }
 
-            var email = new JObject ();
-            email["email"] = customer.company_contact_email;
-            return Content (email.ToString (), "application/json");
+            var customeremail = new JObject ();
+            customeremail["Email"] = customer.company_contact_email;
+            return Content (customeremail.ToString (), "application/json");
         }
+
+        // GET: api/Customer/5
+        // [HttpGet("{id}")]
+        //   public async Task<ActionResult<Customer>> GetCustomer(long id)
+        // {
+        //     var customer = await _context.customers.FindAsync(id);
+
+        //     if (customer == null)
+        //     {
+        //         return NotFound();
+        //     }
+        //     // Create a message to show the new status
+        //     var status = new JObject ();
+        //     status["status"] = customer.Id;
+        //     return Content (status.ToString (), "application/json");
+        // }
 
         // PUT: api/User/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
