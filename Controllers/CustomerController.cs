@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RestApi.Models;
+using Newtonsoft.Json.Linq;
 
 namespace RestApi.Controllers
 {
@@ -38,7 +39,9 @@ namespace RestApi.Controllers
                 return NotFound();
             }
 
-            return customer;
+            var customerid = new JObject ();
+            customerid["Customer ID"] = customer.Id;
+            return Content (customerid.ToString (), "application/json");
         }
 
         // GET: api/Customer/test@test.com
@@ -52,7 +55,9 @@ namespace RestApi.Controllers
                 return NotFound();
             }
 
-            return customer;
+            var email = new JObject ();
+            email["email"] = customer.company_contact_email;
+            return Content (email.ToString (), "application/json");
         }
 
         // PUT: api/User/5
