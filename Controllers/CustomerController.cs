@@ -68,6 +68,15 @@ namespace RestApi.Controllers
 
             return elevator;
         }
+        // https://localhost:3003/api/Customer/GetAllCustomerEmail/test@test.com
+        [HttpGet("[action]/{company_contact_email}")]
+        public ActionResult<List<Customer>> GetAllCustomerEmail (string company_contact_email )
+        {
+            // _context = datatbase   buildings = table references 
+            var customeremail = _context.customers.Where(x => x.company_contact_email == company_contact_email).ToList();
+
+            return customeremail;
+        }
 
 
         // GET: api/Customer/5
