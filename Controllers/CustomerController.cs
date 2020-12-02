@@ -28,38 +28,64 @@ namespace RestApi.Controllers
             return await _context.customers.ToListAsync();
         }
 
-        //GET: api/Customer/test@test.com
-        // [HttpGet("{company_contact_email}")]
-        // public async Task<ActionResult<Customer>> GetCustomer(string company_contact_email)
+        // https://localhost:3003/api/Customer/GetAllCustomerBuildings/1
+        [HttpGet("[action]/{Id}")]
+        public ActionResult<List<Building>> GetAllCustomerBuildings (long Id )
+        {
+            // _context = datatbase   buildings = table references 
+            var customer = _context.buildings.Where(x => x.customer_id == Id).ToList();
+
+            return customer;
+        }
+
+
+        // https://localhost:3003/api/Customer/GetAllCustomerBatteries/1
+        [HttpGet("[action]/{Id}")]  
+        public ActionResult<List<Battery>> GetAllCustomerBatteries (long Id )
+        {
+            // _context = datatbase   buildings = table references 
+            var battery = _context.batteries.Where(x => x.building_id == Id).ToList();
+
+            return battery;
+        }
+
+        // https://localhost:3003/api/Customer/GetAllCustomerColumns/1
+        [HttpGet("[action]/{Id}")]   
+        public ActionResult<List<Column>> GetAllCustomerColumns (long Id )
+        {
+            // _context = datatbase   buildings = table references 
+            var column = _context.columns.Where(x => x.battery_id == Id).ToList();
+
+            return column;
+        }
+        
+        // https://localhost:3003/api/Customer/GetAllCustomerElevators/1
+        [HttpGet("[action]/{Id}")]
+        public ActionResult<List<Elevator>> GetAllCustomerElevators (long Id )
+        {
+            // _context = datatbase   buildings = table references 
+            var elevator = _context.elevators.Where(x => x.column_id == Id).ToList();
+
+            return elevator;
+        }
+
+
+        // GET: api/Customer/5
+        // [HttpGet("{id}")]
+        //   public async Task<ActionResult<Customer>> GetCustomer(long id)
         // {
-        //     var customer = await _context.customers.FindAsync(company_contact_email);
+        //     var customer = await _context.customers.FindAsync(id);
 
         //     if (customer == null)
         //     {
         //         return NotFound();
         //     }
-
+        //     //Create a message to show the new status
         //     var status = new JObject ();
         //     status["email"] = customer.company_contact_email;
         //     return Content (status.ToString (), "application/json");
+
         // }
-
-        // GET: api/Customer/5
-        [HttpGet("{id}")]
-          public async Task<ActionResult<Customer>> GetCustomer(long id)
-        {
-            var customer = await _context.customers.FindAsync(id);
-
-            if (customer == null)
-            {
-                return NotFound();
-            }
-            //Create a message to show the new status
-            var status = new JObject ();
-            status["email"] = customer.company_contact_email;
-            return Content (status.ToString (), "application/json");
-
-        }
 
         // PUT: api/User/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
