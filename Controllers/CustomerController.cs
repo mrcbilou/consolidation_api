@@ -28,9 +28,19 @@ namespace RestApi.Controllers
             return await _context.customers.ToListAsync();
         }
 
+
+        // [HttpGet("[action]")]
+        // public async Task<ActionResult<IEnumerable<Customer>>> GetEmail()
+        // {
+        //     var email =  await _context.customers.Where(x => x.company_contact_email ==  ).ToList();
+
+        //     return email;
+        // }   
+
+
         // https://localhost:3003/api/Customer/GetAllCustomerBuildings/1
         [HttpGet("[action]/{Id}")]
-        public ActionResult<List<Building>> GetAllCustomerBuildings (long Id )
+        public ActionResult<IEnumerable<Building>> GetAllCustomerBuildings (long Id )
         {
             // _context = datatbase   buildings = table references 
             var customer = _context.buildings.Where(x => x.customer_id == Id).ToList();
@@ -41,7 +51,7 @@ namespace RestApi.Controllers
 
         // https://localhost:3003/api/Customer/GetAllCustomerBatteries/1
         [HttpGet("[action]/{Id}")]  
-        public ActionResult<List<Battery>> GetAllCustomerBatteries (long Id )
+        public ActionResult<IEnumerable<Battery>> GetAllCustomerBatteries (long Id )
         {
             // _context = datatbase   buildings = table references 
             var battery = _context.batteries.Where(x => x.building_id == Id).ToList();
@@ -51,7 +61,7 @@ namespace RestApi.Controllers
 
         // https://localhost:3003/api/Customer/GetAllCustomerColumns/1
         [HttpGet("[action]/{Id}")]   
-        public ActionResult<List<Column>> GetAllCustomerColumns (long Id )
+        public ActionResult<IEnumerable<Column>> GetAllCustomerColumns (long Id )
         {
             // _context = datatbase   buildings = table references 
             var column = _context.columns.Where(x => x.battery_id == Id).ToList();
@@ -61,7 +71,7 @@ namespace RestApi.Controllers
         
         // https://localhost:3003/api/Customer/GetAllCustomerElevators/1
         [HttpGet("[action]/{Id}")]
-        public ActionResult<List<Elevator>> GetAllCustomerElevators (long Id )
+        public ActionResult<IEnumerable<Elevator>> GetAllCustomerElevators (long Id )
         {
             // _context = datatbase   buildings = table references 
             var elevator = _context.elevators.Where(x => x.column_id == Id).ToList();
