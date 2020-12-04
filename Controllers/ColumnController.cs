@@ -29,6 +29,39 @@ namespace RestApi.Controllers
             return await _context.columns.ToListAsync();
         }
 
+
+        // GET: api/columns/battery/{id}
+        [HttpGet("battery/{id}")]
+        public ActionResult<List<Column>> GetColumnsFromBattery(long id)
+        {
+            List<Column> columnsAll = _context.columns.ToList();
+            List<Column> columnsFromBattery = new List<Column>();
+            foreach (Column column in columnsAll)
+            {
+                if (column.battery_id == id)
+                {
+                    columnsFromBattery.Add(column);
+                }
+            }
+            return columnsFromBattery;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         // GET: api/Column/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Column>> GetColumn(long id)

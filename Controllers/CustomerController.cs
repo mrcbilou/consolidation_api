@@ -26,85 +26,148 @@ namespace RestApi.Controllers
         public async Task<ActionResult<IEnumerable<Customer>>> GetCustomers()
         {
             return await _context.customers.ToListAsync();
+
+           
+            
         }
 
 
-        // [HttpGet("[action]")]
-        // public async Task<ActionResult<IEnumerable<Customer>>> GetEmail()
-        // {
-        //     var email =  await _context.customers.Where(x => x.company_contact_email ==  ).ToList();
 
-        //     return email;
-        // }   
+        // [HttpGet("[action]/{Id}")] 
+        // public ActionResult<List<Customer>> GetAll (long Id) {
+        //     var customlist = _context.customers.ToList(); // List of all the buildings in the database
+        //     var buildlist = _context.buildings.ToList(); // List of all the buildings in the database
+        //     var battlist = _context.batteries.ToList(); // List of all the buildings in the database
+        //     var columnlist = _context.columns.ToList(); // List of all the columns in the database
+        //     var elevatorlist = _context.elevators.ToList(); // List of all the elevators in the database
 
-
-        // https://localhost:3003/api/Customer/GetAllCustomerBuildings/1
-        [HttpGet("[action]/{Id}")]
-        public ActionResult<IEnumerable<Building>> GetAllCustomerBuildings (long Id )
-        {
-            // _context = datatbase   buildings = table references 
-            var customer = _context.buildings.Where(x => x.customer_id == Id).ToList();
-
-            return customer;
-        }
+        //     List<Elevator> list_elev = new List<Elevator>(); // Elevators will be added in this list if they respect the requirements (If they have an intervention status)
+        //     List<Column> list_col = new List<Column>(); // Columns will be added in this list if they respect the requirements (If they have an intervention status)
+        //     List<Battery> list_batt = new List<Battery>(); // Batteries will be added in this list if they respect the requirements (If they have an intervention status)
+        //     List<Building> list_build = new List<Building>(); // // Buildings will be added in this list if they have at least a battery, column or elevator with an intervention status.
+        //     List<Customer> list_customer = new List<Customer> (); // Same as list_lead but with no duplicate
+            
 
 
-        // https://localhost:3003/api/Customer/GetAllCustomerBatteries/1
-        [HttpGet("[action]/{Id}")]  
-        public ActionResult<IEnumerable<Battery>> GetAllCustomerBatteries (long Id )
-        {
-            // _context = datatbase   buildings = table references 
-            var battery = _context.batteries.Where(x => x.building_id == Id).ToList();
-
-            return battery;
-        }
-
-        // https://localhost:3003/api/Customer/GetAllCustomerColumns/1
-        [HttpGet("[action]/{Id}")]   
-        public ActionResult<IEnumerable<Column>> GetAllCustomerColumns (long Id )
-        {
-            // _context = datatbase   buildings = table references 
-            var column = _context.columns.Where(x => x.battery_id == Id).ToList();
-
-            return column;
-        }
-        
-        // https://localhost:3003/api/Customer/GetAllCustomerElevators/1
-        [HttpGet("[action]/{Id}")]
-        public ActionResult<IEnumerable<Elevator>> GetAllCustomerElevators (long Id )
-        {
-            // _context = datatbase   buildings = table references 
-            var elevator = _context.elevators.Where(x => x.column_id == Id).ToList();
-
-            return elevator;
-        }
-        // https://localhost:3003/api/Customer/GetAllCustomerEmail/test@test.com
-        [HttpGet("[action]/{company_contact_email}")]
-        public ActionResult<List<Customer>> GetAllCustomerEmail (string company_contact_email )
-        {
-            // _context = datatbase   buildings = table references 
-            var customeremail = _context.customers.Where(x => x.company_contact_email == company_contact_email).ToList();
-
-            return customeremail;
-        }
-
-
-        // GET: api/Customer/5
-        // [HttpGet("{id}")]
-        //   public async Task<ActionResult<Customer>> GetCustomer(long id)
-        // {
-        //     var customer = await _context.customers.FindAsync(id);
-
-        //     if (customer == null)
-        //     {
-        //         return NotFound();
+        //     if (customlist == null) {
+        //         return NotFound ("Not Found");
         //     }
-        //     //Create a message to show the new status
-        //     var status = new JObject ();
-        //     status["email"] = customer.company_contact_email;
-        //     return Content (status.ToString (), "application/json");
 
+
+        //     // Add columns in the list if they have an elevator with an intervention status
+        //     foreach (var elevator in list_elev){
+        //         foreach (var column in columnlist){
+        //             if (column.Id == elevator.column_id){
+        //                 list_col.Add(column);
+        //             }
+        //         }
+        //     }
+
+
+        //     foreach ( var column in list_col){
+        //         foreach (var elevator in elevatorlist ){
+        //             if (column.Id == elevator.column_id){
+        //                 list_elev.Add(elevator);
+        //             }
+        //         }
+        //     }
+            
+        //     // Add batteries in the list if they have a column with an intervention status
+        //     foreach (var column in list_col){
+        //         foreach (var battery in battlist){
+        //             if (battery.Id == column.battery_id){
+        //                 list_batt.Add(battery);
+        //             }
+        //         }
+        //     }
+           
+        //     // Add buildings in the list if they have a battery with an intervention status
+        //     foreach (var battery in list_batt){
+        //         foreach (var building in buildlist){
+        //             if (building.Id == battery.building_id){
+        //                list_build.Add(building); 
+        //             }
+        //         }
+        //     }
+
+        //     foreach (var customer in list_customer){
+        //             foreach (var building in buildlist)
+        //             {
+        //                 if (building.Id == customer.Id)
+        //                 {
+        //                  list_customer.Add(customer); 
+        //                 }
+        //             }
+        //     }
+        
+
+        //     // Remove any duplicate buildings in the list
+        //     List<Customer> all_customer = list_customer.Distinct().ToList();
+        //     return all_customer;
+         
         // }
+
+
+        // // https://localhost:3003/api/Customer/GetAllCustomerBuildings/1
+        // [HttpGet("[action]/{Id}")]
+        // public ActionResult<IEnumerable<Building>> GetAllCustomerBuildings (long Id )
+        // {
+        //     // _context = datatbase   buildings = table references 
+        //     var customer = _context.buildings.Where(x => x.customer_id == Id).ToList();
+
+        //     return customer;
+        // }
+
+
+        // // https://localhost:3003/api/Customer/GetAllCustomerBatteries/1
+        // [HttpGet("[action]/{Id}")]  
+        // public ActionResult<IEnumerable<Battery>> GetAllCustomerBatteries (long Id )
+        // {
+        //     // _context = datatbase   buildings = table references 
+        //     var battery = _context.batteries.Where(x => x.building_id == Id).ToList();
+
+        //     return battery;
+        // }
+
+        // // https://localhost:3003/api/Customer/GetAllCustomerColumns/1
+        // [HttpGet("[action]/{Id}")]   
+        // public ActionResult<IEnumerable<Column>> GetAllCustomerColumns (long Id )
+        // {
+        //     // _context = datatbase   buildings = table references 
+        //     var column = _context.columns.Where(x => x.battery_id == Id).ToList();
+
+        //     return column;
+        // }
+        
+        // // https://localhost:3003/api/Customer/GetAllCustomerElevators/1
+        // [HttpGet("[action]/{Id}")]
+        // public ActionResult<IEnumerable<Elevator>> GetAllCustomerElevators (long Id )
+        // {
+        //     // _context = datatbase   buildings = table references 
+        //     var elevator = _context.elevators.Where(x => x.column_id == Id).ToList();
+
+        //     return elevator;
+        // }
+
+        // GET: api/Customer/find/{email}
+        [HttpGet("find/{company_contact_email}")]
+        public ActionResult<Customer> GetCustomerEmail(string company_contact_email)
+        {
+            var decodedEmail = System.Web.HttpUtility.UrlDecode(company_contact_email);
+            Console.WriteLine(decodedEmail);
+            var customerEmail = _context.customers
+            .Where(c => c.company_contact_email == decodedEmail);
+            //.FirstOrDefaultAsync();
+            if (customerEmail == null)
+            {
+                return NotFound();
+            }
+            return Ok(customerEmail);
+        }
+
+       
+
+
 
         // PUT: api/User/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for

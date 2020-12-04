@@ -42,6 +42,35 @@ namespace RestApi.Controllers
             return inactive_elevator_list;
         }
 
+
+
+
+        // GET: api/elevators/column/{id}
+        [HttpGet("column/{id}")]
+        public ActionResult<List<Elevator>> GetElevatorsFromColumn(long id)
+        {
+            List<Elevator> elevatorsAll = _context.elevators.ToList();
+            List<Elevator> elevatorsFromColumn = new List<Elevator>();
+            foreach (Elevator elevator in elevatorsAll)
+            {
+                if (elevator.column_id == id)
+                {
+                    elevatorsFromColumn.Add(elevator);
+                }
+            }
+            return elevatorsFromColumn;
+        }
+
+
+
+
+
+
+
+
+
+
+
         // GET: api/Elevator/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Elevator>> GetElevator(long id)

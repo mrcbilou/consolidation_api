@@ -21,6 +21,26 @@ namespace RestApi.Controllers
             _context = context;
         }
 
+
+
+        // GET: api/batteries/building/{id}
+        [HttpGet("building/{id}")]
+        public ActionResult<List<Battery>> GetBatteriesFromBuilding(long id)
+        {
+            List<Battery> batteriesAll = _context.batteries.ToList();
+            List<Battery> batteriesFromBuilding = new List<Battery>();
+            foreach (Battery battery in batteriesAll)
+            {
+                if (Convert.ToInt64(battery.building_id) == id)
+                {
+                    batteriesFromBuilding.Add(battery);
+                }
+            }
+            return batteriesFromBuilding;
+        }
+
+
+
         // GET: api/Battery
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Battery>>> Getbatteries()

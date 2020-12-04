@@ -13,7 +13,7 @@ namespace RestApi.Models
         public string status {get; set;}
         public string entity {get; set;}
         public string number_and_street {get; set;}
-        public string suite_or_appartment {get; set;}
+        public string suite_or_apartment {get; set;}
         public string city {get; set;}
         public string postal_code {get; set; }
         public string country {get; set;}
@@ -22,4 +22,17 @@ namespace RestApi.Models
         public DateTime? created_at {get; set;}
         public DateTime? updated_at {get; set;}
     }
+
+
+    public class AddressesInfo
+    {
+        public long Id { get; set; }
+        public string type_of_address { get; set; }
+        public string number_and_street { get; set; }
+        public string suite_or_apartment { get; set; }
+        public string city { get; set; }
+        public string postal_code { get; set; }
+        public string country { get; set; }
+    }
+
 }

@@ -20,6 +20,25 @@ namespace RestApi.Controllers
             _context = context;
         }
 
+
+        // GET: api/buildings/customer/{id}
+        [HttpGet("customer/{id}")]
+        public ActionResult<List<Building>> GetBuildingsFromCustomer(long id)
+        {
+            List<Building> buildingsAll = _context.buildings.ToList();
+            List<Building> buildingsFromCustomer = new List<Building>();
+            foreach (Building building in buildingsAll)
+            {
+                if (building.customer_id == id)
+                {
+                    buildingsFromCustomer.Add(building);
+                }
+            }
+            return buildingsFromCustomer;
+        }
+        
+
+
         // GET: api/Building
         [HttpGet]
         public ActionResult<List<Building>> GetAll ()
