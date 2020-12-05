@@ -165,6 +165,29 @@ namespace RestApi.Controllers
             return Ok(customerEmail);
         }
 
+        // [HttpGet("{company_contact_email}")]
+        // public  IEnumerable<Customer> GetCustomerList(string company_contact_email)
+        // {
+        //     IEnumerable<Customer> Customers =
+        //     from customer in _context.customers
+        //     join buildings in _context.buildings on customer.Id equals buildings.customer_id
+        //     where buildings.customer_id == customer.Id 
+
+        //     join batteries in _context.batteries on buildings.Id equals batteries.building_id
+        //     where batteries.building_id == buildings.Id
+
+        //     join columns in _context.columns on batteries.Id equals columns.battery_id
+        //     where columns.battery_id == batteries.Id
+
+        //     join elevator in _context.elevators on columns.Id equals elevator.column_id
+        //     where elevator.column_id == columns.Id 
+            
+        //     select customer;       
+        //     return Customers.Distinct<Customer>().ToList();
+        // } 
+
+
+
        
 
 
